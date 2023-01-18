@@ -1,0 +1,6 @@
+apiVersion: core.openstack.org/v1beta1
+kind: OpenStackDataPlaneNode
+metadata:
+  name: openstackdataplanenode-sample
+spec:
+  # TODO(user): Add fields here
