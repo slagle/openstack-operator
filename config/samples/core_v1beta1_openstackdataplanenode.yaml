@@ -3,4 +3,13 @@ kind: OpenStackDataPlaneNode
 metadata:
   name: openstackdataplanenode-sample
 spec:
-  # TODO(user): Add fields here
+  name: edpm-compute-0.localdomain
+  hostName: edpm-compute-0.localdomain
+  networkConfig:
+    template: templates/net_config_bridge.j2
+  networks:
+    - network: management
+      fixedip: 192.168.24.1/24
+  managed: false
+  managementNetwork: management
+

@@ -25,11 +25,18 @@ import (
 
 // OpenStackDataPlaneSpec defines the desired state of OpenStackDataPlane
 type OpenStackDataPlaneSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of OpenStackDataPlane. Edit openstackdataplane_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// DataPlaneNodeRole - Grouping of dataplane nodes of the same type
+	DataPlaneNodeRole OpenStackDataPlaneRoleSection `json:"dataPlaneNodeRole,omitempty"`
+}
+
+type OpenStackDataPlaneRoleSection struct {
+
+	// Name - role name
+	Name string `json:"name,omitempty"`
+
+	// DataPlaneNodes - List of nodes in this role
+	DataPlaneNodes []OpenStackDataPlaneNodeSpec `json:"dataPlaneNodes,omitempty"`
 }
 
 // OpenStackDataPlaneStatus defines the observed state of OpenStackDataPlane

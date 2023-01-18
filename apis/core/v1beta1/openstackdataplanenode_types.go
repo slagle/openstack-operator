@@ -20,16 +20,54 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
-
 // OpenStackDataPlaneNodeSpec defines the desired state of OpenStackDataPlaneNode
 type OpenStackDataPlaneNodeSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of OpenStackDataPlaneNode. Edit openstackdataplanenode_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// +kubebuilder:validation:Optional
+	// Name - node name
+	Name string `json:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// HostName - node name
+	HostName string `json:"hostName,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// NetworkConfig - Network configuration details. Contains os-net-config
+	// related properties.
+	NetworkConfig NetworkConfigSection `json:"networkConfig,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// Networks - Instance networks
+	Networks []NetworksSection `json:"networks,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// Managed - Whether the node is actually provisioned (True) or should be
+	// treated as preprovisioned (False)
+	Managed bool `json:"managed,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// ManagementNetwork - Name of network to use for management (SSH/Ansible)
+	ManagementNetwork string `json:"managementNetwork,omitempty"`
+}
+
+type NetworkConfigSection struct {
+
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default=templates/net_config_bridge.j2
+	// Template - ansible j2 nic config template to use when applying node
+	// network configuration
+	Template string `json:"template,omitempty"`
+}
+
+type NetworksSection struct {
+
+	// +kubebuilder:validation:Optional
+	// Network - Network name to configure
+	Network string `json:"template,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// FixedIP - Specific IP address to use for this network
+	FixedIP string `json:"fixedip,omitempty"`
 }
 
 // OpenStackDataPlaneNodeStatus defines the observed state of OpenStackDataPlaneNode
