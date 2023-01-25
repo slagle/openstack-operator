@@ -71,7 +71,7 @@ func (r *OpenStackDataPlaneNodeReconciler) Reconcile(ctx context.Context, req ct
 		return ctrl.Result{}, err
 	}
 
-	if instance.Spec.Managed {
+	if instance.Spec.Node.Managed {
 		err = r.Provision(ctx, instance)
 		if err != nil {
 			r.Log.Error(err, fmt.Sprintf("Unable to OpenStackDataPlaneNode %s", instance.Name))
@@ -120,8 +120,8 @@ func (r *OpenStackDataPlaneNodeReconciler) GenerateInventory(ctx context.Context
 	all := make(map[string]map[string]map[string]string)
 	host := make(map[string]map[string]string)
 	host_vars := make(map[string]string)
-	host_vars["ansible_host"] = instance.Spec.HostName
-	host[instance.Spec.Name] = host_vars
+	host_vars["ansible_host"] = instance.Spec.Node.HostName
+	host[instance.Name] = host_vars
 	all["hosts"] = host
 	inventory["all"] = all
 

@@ -24,12 +24,19 @@ import (
 type OpenStackDataPlaneNodeSpec struct {
 
 	// +kubebuilder:validation:Optional
-	// Name - node name
-	Name string `json:"name,omitempty"`
-
-	// +kubebuilder:validation:Optional
 	// HostName - node name
 	HostName string `json:"hostName,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// Node - node section
+	Node NodeSection `json:"node,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// TemplateRef - template reference for setting node defaults from template
+	TemplateRef string `json:"templateRef,omitempty"`
+}
+
+type NodeSection struct {
 
 	// +kubebuilder:validation:Optional
 	// NetworkConfig - Network configuration details. Contains os-net-config
@@ -48,6 +55,18 @@ type OpenStackDataPlaneNodeSpec struct {
 	// +kubebuilder:validation:Optional
 	// ManagementNetwork - Name of network to use for management (SSH/Ansible)
 	ManagementNetwork string `json:"managementNetwork,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// AnsibleUser SSH user for Ansible connection
+	AnsibleUser string `json:"ansibleUser,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// AnsibleHost SSH host for Ansible connection
+	AnsibleHost string `json:"ansibleHost,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// AnsiblePort SSH port for Ansible connection
+	AnsiblePort string `json:"ansiblePort,omitempty"`
 }
 
 type NetworkConfigSection struct {

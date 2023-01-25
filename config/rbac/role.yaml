@@ -84,6 +84,32 @@ rules:
 - apiGroups:
   - core.openstack.org
   resources:
+  - openstackdataplanenodetemplates
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - core.openstack.org
+  resources:
+  - openstackdataplanenodetemplates/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - core.openstack.org
+  resources:
+  - openstackdataplanenodetemplates/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - core.openstack.org
+  resources:
   - openstackdataplanes
   verbs:
   - create

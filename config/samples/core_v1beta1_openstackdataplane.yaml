@@ -3,4 +3,5 @@ kind: OpenStackDataPlane
 metadata:
   name: openstackdataplane-sample
 spec:
-  # TODO(user): Add fields here
+  dataPlaneNodes: []
+  dataPlaneNodeTemplates: []

@@ -23,19 +23,15 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// OpenStackDataPlaneSpec defines the desired state of OpenStackDataPlane
-type OpenStackDataPlaneSpec struct {
-
-	// DataPlaneNodes - List of nodes in this role
-	DataPlaneNodes []OpenStackDataPlaneNodeSpec `json:"dataPlaneNodes,omitempty"`
-
-	// DataPlaneNodeTemplates - List of templates for setting attribute
-	// defaults on nodes.
-	DataPlaneNodeTemplates []OpenStackDataPlaneNodeTemplateSpec `json:"dataPlaneNodeTemplates,omitempty"`
+// OpenStackDataPlaneNodeTemplateSpec defines the desired state of OpenStackDataPlaneNodeTemplate
+type OpenStackDataPlaneNodeTemplateSpec struct {
+	// +kubebuilder:validation:Optional
+	// Node - node section defining attributes for this template
+	Node NodeSection `json:"node,omitempty"`
 }
 
-// OpenStackDataPlaneStatus defines the observed state of OpenStackDataPlane
-type OpenStackDataPlaneStatus struct {
+// OpenStackDataPlaneNodeTemplateStatus defines the observed state of OpenStackDataPlaneNodeTemplate
+type OpenStackDataPlaneNodeTemplateStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -43,24 +39,24 @@ type OpenStackDataPlaneStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// OpenStackDataPlane is the Schema for the openstackdataplanes API
-type OpenStackDataPlane struct {
+// OpenStackDataPlaneNodeTemplate is the Schema for the openstackdataplanenodetemplates API
+type OpenStackDataPlaneNodeTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   OpenStackDataPlaneSpec   `json:"spec,omitempty"`
-	Status OpenStackDataPlaneStatus `json:"status,omitempty"`
+	Spec   OpenStackDataPlaneNodeTemplateSpec   `json:"spec,omitempty"`
+	Status OpenStackDataPlaneNodeTemplateStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// OpenStackDataPlaneList contains a list of OpenStackDataPlane
-type OpenStackDataPlaneList struct {
+// OpenStackDataPlaneNodeTemplateList contains a list of OpenStackDataPlaneNodeTemplate
+type OpenStackDataPlaneNodeTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []OpenStackDataPlane `json:"items"`
+	Items           []OpenStackDataPlaneNodeTemplate `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&OpenStackDataPlane{}, &OpenStackDataPlaneList{})
+	SchemeBuilder.Register(&OpenStackDataPlaneNodeTemplate{}, &OpenStackDataPlaneNodeTemplateList{})
 }

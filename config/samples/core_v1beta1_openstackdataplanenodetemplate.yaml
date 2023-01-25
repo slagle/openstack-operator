@@ -1,9 +1,8 @@
 apiVersion: core.openstack.org/v1beta1
-kind: OpenStackDataPlaneNode
+kind: OpenStackDataPlaneNodeTemplate
 metadata:
-  name: openstackdataplanenode-sample
+  name: openstackdataplanenodetemplate-sample
 spec:
-  hostName: edpm-compute-0.localdomain
   node:
     networkConfig:
       template: templates/net_config_bridge.j2
@@ -12,4 +11,3 @@ spec:
         fixedip: 192.168.24.1/24
     managed: false
     managementNetwork: management
-  templateRef: openstackdataplanenodetemplate-sample
